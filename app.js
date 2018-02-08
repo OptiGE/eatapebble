@@ -19,7 +19,7 @@ var UI = require('ui');
 //Everything will be on this card, but the text is updated. 
 var card = new UI.Card();
 card.scrollable(true);
-card.style('small');
+//card.style('small');
 
 //The main menu
 var mainMenu = new UI.Menu({
@@ -72,7 +72,8 @@ today = yyyy + '-' + mm + '-' + dd;
 //-----------------------------COLLECT API DATA-------------------------------
 
 /* This is a slightly chunky block of code. But the indexes are different in linsen
-   To fix this in the future, make a more general function and put this heap of variables in an array*/
+   To fix this in the future, make a more general function and put this heap of variables in an array
+   Notice for example that at displayNames[x], x has a different value at Linsen*/
 
 //Kårresturangen (Only veg and fish for now)
 var karenfood = getData(karenURL, 0, false);
