@@ -72,9 +72,8 @@ today = yyyy + '-' + mm + '-' + dd;
 //-----------------------------COLLECT API DATA-------------------------------
 
 /* This is a slightly chunky block of code. But the indexes are different in linsen
-   To fix this in the future, make a more general function and put this heap of variables in an array
-   Notice for example that at displayNames[x], x has a different value at Linsen*/
-
+   To fix this in the future, make a more general function and put this heap of variables in an array*/
+try{
 //Kårresturangen (Only veg and fish for now)
 var karenfood = getData(karenURL, 0, false);
 var karenveg = karenfood[0].recipes[0].displayNames[0].displayName;
@@ -94,7 +93,11 @@ var smakveckans = smakfood[1].recipes[0].displayNames[0].displayName;
 var linsenfood = getData(linsenTodayURL, 0, true);
 var linsendagens1 = linsenfood[0].recipes[0].displayNames[0].displayName;
 var linsendagens2 = linsenfood[0].recipes[0].displayNames[1].displayName;
-
+}catch(e){
+  console.log(e.message);
+  console.log("Failed to assign variables.");
+  showCard (-1);
+}
 
 //-----------------RUN PROGRAM-------------------------
 mainMenu.show();
@@ -132,31 +135,54 @@ function showCard (slide){
 
 //Make request for JSON data
 function getData (url, day, linsen){
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", url, false);
-  xmlhttp.send();
-  var data = JSON.parse(xmlhttp.responseText); 
+  
+  var data;
+  
+  try {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", url, false);
+    xmlhttp.send();
+    data = JSON.parse(xmlhttp.responseText); 
+  }
+  catch(err) {
+    console.log("failed to set up http request");
+    console.log(err.message);
+    showCard (-1);
+  }
   
   
   //If linsen (has its own format, and returns todays food)
-  if (linsen){
+  try{
+    if (linsen){
     return data.recipeCategories;
   }
+  }catch(e){
+    console.log("linsen parse error");
+    showCard (-1);
+  }
+  
   
   
   //For all restaurants, but not linsen
   //Search through the 5 days of the week
-  for (var i = 0; i < 4; i++){
+  
+  try{
+    for (var i = 0; i < 4; i++){
     //If todays date is found
-    if (data.menus[i].menuDate == today + "T00:00:00"){
-      if (day == 0){
-        //If asking for todays food
-        return data.menus[i].recipeCategories;
-      } else {
-        //If asking for tomorrows food
-        return data.menus[i].recipeCategories;
+      if (data.menus[i].menuDate == today + "T00:00:00"){
+        if (day == 0){
+          //If asking for todays food
+          return data.menus[i].recipeCategories;
+        } else {
+          //If asking for tomorrows food
+          return data.menus[i].recipeCategories;
+        }
       }
-    }
+    }   
+  }catch(e){
+    console.log(e.message);
+    console.log("Failed to retrieve data...");
+    showCard (-1);
   }
   //If todays date wasn't found
     showCard (-1);
