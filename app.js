@@ -19,14 +19,14 @@ var UI = require('ui');
 //Everything will be on this card, but the text is updated. 
 var card = new UI.Card();
 card.scrollable(true);
-//card.style('small');
+card.style('small');
 
 //The main menu
 var mainMenu = new UI.Menu({
-  backgroundColor: 'white',
-  textColor: '#000856',
-  highlightBackgroundColor: '#00b1f7',
-  highlightTextColor: 'black',
+  backgroundColor: '#0000FF',
+  textColor: 'white',
+  highlightBackgroundColor: '#0000AA',
+  highlightTextColor: 'white',
   sections: [{
     title: 'Restauranger',
     items: [{
@@ -75,21 +75,26 @@ today = yyyy + '-' + mm + '-' + dd;
    To fix this in the future, make a more general function and put this heap of variables in an array*/
 try{
 //Kårresturangen (Only veg and fish for now)
+console.log("111");
 var karenfood = getData(karenURL, 0, false);
+console.log(JSON.stringify(karenfood));
 var karenveg = karenfood[0].recipes[0].displayNames[0].displayName;
 var karenfish = karenfood[1].recipes[0].displayNames[0].displayName;
 
 //Express 
+  console.log("222");
 var xpressfood = getData(xpressURL, 0, false);
 var xpressveg = xpressfood[1].recipes[0].displayNames[0].displayName;
 var xpressmeat = xpressfood[0].recipes[0].displayNames[0].displayName;
 
 //Smak 
+  console.log("333");
 var smakfood = getData(smakURL, 0, false);
 var smakdagens = smakfood[0].recipes[0].displayNames[0].displayName;
 var smakveckans = smakfood[1].recipes[0].displayNames[0].displayName;
 
 //Linsen
+  console.log("444");
 var linsenfood = getData(linsenTodayURL, 0, true);
 var linsendagens1 = linsenfood[0].recipes[0].displayNames[0].displayName;
 var linsendagens2 = linsenfood[0].recipes[0].displayNames[1].displayName;
@@ -167,7 +172,7 @@ function getData (url, day, linsen){
   //Search through the 5 days of the week
   
   try{
-    for (var i = 0; i < 4; i++){
+    for (var i = 0; i < 5; i++){
     //If todays date is found
       if (data.menus[i].menuDate == today + "T00:00:00"){
         if (day == 0){
@@ -185,6 +190,7 @@ function getData (url, day, linsen){
     showCard (-1);
   }
   //If todays date wasn't found
+    console.log("Returning all data!");
     showCard (-1);
     return data;
 }
