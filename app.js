@@ -5,7 +5,7 @@ This is open source, feel free to just fuck it up. No warranties for anything. A
 TODO:
 *Add option to choose day (like show tomorrows food). Functionality is mostly already implementet into getData().
 *Add more restaurants. (Can be found at mat.dtek.se).
-*Clean up the code. Make more general functions. Maybe even classes if i manage to fucking grasp JS.
+*Clean up the code. Make more general functions.
 *Make the design bearable and not burn your eyes out. 
 *Try catch the http request fails and such. 
 *Show tomorrows food (when possible) if the time is after, like, 18:00
@@ -118,7 +118,6 @@ mainMenu.on('select', function(e) {
 
 //Shows card (slide = restaurant)
 function showCard (slide){
-  //Nah u srs? The showCard function shows carddsssss???!?!?! Fuck me...
   if (slide == 0){
     card.title('Xpress');
     card.body("Veg: " + xpressveg + "\nKött: " + xpressmeat);
