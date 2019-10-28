@@ -1,14 +1,10 @@
 /*
 Pebble app for showing the food served at verious restaurants at Chalmers University of Technology. 
-This is open source, feel free to just fuck it up. No warranties for anything. At all. 
 
 TODO:
 *Add option to choose day (like show tomorrows food). Functionality is mostly already implementet into getData().
-*Add more restaurants. (Can be found at mat.dtek.se).
-*Clean up the code. Make more general functions.
-*Make the design bearable and not burn your eyes out. 
-*Try catch the http request fails and such. 
-*Show tomorrows food (when possible) if the time is after, like, 18:00
+*Add more restaurants. (Can be found at mat.dtek.se). 
+*Show tomorrows food (when possible) if the time is after 18:00
 */
 
 //-------------------VARIABLES--------------------------
@@ -71,8 +67,6 @@ today = yyyy + '-' + mm + '-' + dd;
 
 //-----------------------------COLLECT API DATA-------------------------------
 
-/* This is a slightly chunky block of code. But the indexes are different in linsen
-   To fix this in the future, make a more general function and put this heap of variables in an array*/
 try{
 //Kårresturangen (Only veg and fish for now)
 console.log("111");
@@ -104,7 +98,7 @@ var linsendagens2 = linsenfood[0].recipes[0].displayNames[1].displayName;
   showCard (-1);
 }
 
-//-----------------RUN PROGRAM-------------------------
+//-----------------SHOW MENU CARD-------------------------
 mainMenu.show();
 
 // -----------------FUNCTIONS------------------------
